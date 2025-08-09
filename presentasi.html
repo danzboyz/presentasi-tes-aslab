@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Web Presentasi Keren</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', Arial, sans-serif;
+      overflow: hidden;
+      background: #111;
+      color: #eee;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Particle background */
+    .particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.15);
+      animation: drift 12s linear infinite;
+      filter: drop-shadow(0 0 4px rgba(255,255,255,0.3));
+      will-change: transform;
+    }
+    @keyframes drift {
+      0% { transform: translateY(0) translateX(0); opacity: 0.1; }
+      50% { opacity: 0.6; }
+      100% { transform: translateY(-120vh) translateX(20vw); opacity: 0.1; }
+    }
+
+    /* Slide container */
+    .slide {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 85vw;
+      max-width: 900px;
+      height: 75vh;
+      padding: 40px 50px;
+      background: rgba(0,0,0,0.6);
+      background-size: cover;
+      background-position: center;
+      border-radius: 20px;
+      color: white;
+      box-shadow: 0 0 40px rgba(0,0,0,0.8);
+      transform: translate(-50%, -50%) translateX(100%);
+      opacity: 0;
+      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease-in-out;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    /* Active slide in center */
+    .slide.active {
+      transform: translate(-50%, -50%) translateX(0);
+      opacity: 1;
+      z-index: 20;
+    }
+
+    /* Slide exiting left */
+    .slide.exit-left {
+      transform: translate(-50%, -50%) translateX(-100%);
+      opacity: 0;
+      z-index: 5;
+    }
+    /* Slide exiting right */
+    .slide.exit-right {
+      transform: translate(-50%, -50%) translateX(100%);
+      opacity: 0;
+      z-index: 5;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      margin-bottom: 0.25em;
+      text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    }
+    h2 {
+      font-weight: 500;
+      font-size: 1.4rem;
+      margin-bottom: 1em;
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    ul {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      list-style-type: disc;
+      padding-left: 1.4em;
+      flex-grow: 1;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #999 transparent;
+    }
+    ul::-webkit-scrollbar {
+      width: 6px;
+    }
+    ul::-webkit-scrollbar-thumb {
+      background: #999;
+      border-radius: 10px;
+    }
+
+    a {
+      color: #60a5fa;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #3b82f6;
+      text-decoration: underline;
+    }
+
+    .nav {
+      position: fixed;
+      bottom: 25px;
+      width: 100%;
+      text-align: center;
+      z-index: 30;
+    }
+    .btn {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      border: none;
+      padding: 12px 30px;
+      margin: 0 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(96,165,250,0.6);
+      transition: all 0.3s ease;
+      user-select: none;
+      text-shadow: 0 0 5px rgba(0,0,0,0.4);
+    }
+    .btn:hover {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      box-shadow: 0 8px 20px rgba(37,99,235,0.8);
+      transform: translateY(-3px);
+    }
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 12px rgba(37,99,235,0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .slide {
+        width: 95vw;
+        height: 80vh;
+        padding: 25px 30px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Particle background -->
+  <div class="particles" aria-hidden="true"></div>
+
+  <div class="slide active" style="background-image: url('wl.jpg');">
+    <h1>Presentasi tes aslab</h1>
+    <h2>Nama Nim Jarak Tempuh</h2>
+    <ul>
+      <li>Nama : muhammad wildan shubhan</li>
+      <li>Nim : 231011401710</li>
+      <li>Jurusan : teknik informatika</li>
+      <li>Jarak & estimasi waktu tempuh : 40-60 menit</li>
+      <li>Instagram: <a href="https://www.instagram.com/_wldnshbhn/" target="_blank" rel="noopener noreferrer">@_wldnshbhn</a></li>
+      <li>GitHub: <a href="https://github.com/danzboyz" target="_blank" rel="noopener noreferrer">github/danzboyz</a></li>
+    </ul>
+  </div>
+
+  <div class="slide" style="background-image: url('uh.avif');">
+    <h1>Pengalaman Organisasi</h1>
+    <ul>
+      <li>Hacktown</li>
+      <li>Jabatan : peserta</li>
+      <li>Kegiatan : penetration testing</li>
+      <li>Hal yang Dipelajari : mendalami materi tentang penetration testing</li>
+    </ul>
+  </div>
+
+  <div class="slide" style="background-image: url('ok.jpg');">
+    <h1>Hobi & Minat</h1>
+    <ul>
+      <li>Hobi : suka membaca buku dan menonton youtube</li>
+      <li>Alasannya : memperdalam ilmu dan pengetahuan</li>
+      <li>Aktivitas rutin di luar kuliah : grab dan mengajar TPA</li>
+    </ul>
+  </div>
+
+  <div class="slide" style="background-image: url('OIP\ \(1\).webp');">
+    <h1>Kelebihan & Kekurangan</h1>
+    <ul>
+      <li>Kelebihan saya : menguasai dasar-dasar<br>
+        - html (menengah)<br>
+        - css (menengah)<br>
+        - javascript (dasar)<br>
+        - c++ (dasar)<br>
+        - java (dasar) <br>
+        - My sql database (dasar)
+      </li>
+      <li>Kekurangan & Solusi Mengatasinya : hanya butuh waktu saja</li>
+    </ul>
+  </div>
+
+  <div class="slide" style="background-image: url('OIP.webp');">
+    <h1>Motivasi Menjadi Aslab</h1>
+    <ul>
+      <li>Alasan ingin menjadi Aslab TI : singkat saja menambah dan memperdalam ilmu apapun itu dan menambah pengalaman</li>
+      <li>Yang ingin dipelajari & kontribusi : kontribusi dengan ilmu yang saya punya dan saya juga masih berjuang buat belajar semaksimal mungkin, dan yang ingin saya pelajari semua yang saya belum ketahui dan saya ingin beradaptasi dengan apa yg saya belum ketahui</li>
+    </ul>
+  </div>
+
+  <div class="slide" style="background-image: url('okeeee.webp">
+    <h1>Penutup</h1>
+    <ul>
+      <li>Terimakasih sekian</li>
+      <li>Jika ada pertanyaan silahkan </li>
+    </ul>
+  </div>
+
+  <div class="nav" role="navigation" aria-label="Navigasi slide">
+    <button class="btn" id="prevBtn" aria-label="Slide sebelumnya">◀ Sebelumnya</button>
+    <button class="btn" id="nextBtn" aria-label="Slide berikutnya">Berikutnya ▶</button>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let current = 0;
+    let isAnimating = false;
+
+    function showSlide(newIndex) {
+      if(isAnimating || newIndex === current) return;
+      isAnimating = true;
+
+      const currentSlide = slides[current];
+      const nextSlide = slides[newIndex];
+
+      const forward = newIndex > current || (current === slides.length -1 && newIndex === 0);
+      const backward = !forward;
+
+      slides.forEach(slide => {
+        slide.classList.remove('exit-left', 'exit-right');
+      });
+
+      if(forward){
+        currentSlide.classList.remove('active');
+        currentSlide.classList.add('exit-left');
+      } else {
+        currentSlide.classList.remove('active');
+        currentSlide.classList.add('exit-right');
+      }
+
+      nextSlide.classList.remove('exit-left', 'exit-right');
+      nextSlide.classList.add('active');
+
+      setTimeout(() => {
+        slides.forEach((slide, idx) => {
+          if(idx !== newIndex){
+            slide.classList.remove('active', 'exit-left', 'exit-right');
+            // Hapus style inline agar CSS kembali kendalikan
+            slide.style.transform = '';
+            slide.style.opacity = '';
+          }
+        });
+        isAnimating = false;
+      }, 820);
+
+      current = newIndex;
+    }
+
+    document.getElementById('nextBtn').addEventListener('click', () => {
+      let nextIndex = (current + 1) % slides.length;
+      showSlide(nextIndex);
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', () => {
+      let prevIndex = (current - 1 + slides.length) % slides.length;
+      showSlide(prevIndex);
+    });
+
+    window.addEventListener('keydown', e => {
+      if(e.key === 'ArrowRight'){
+        document.getElementById('nextBtn').click();
+      } else if(e.key === 'ArrowLeft'){
+        document.getElementById('prevBtn').click();
+      }
+    });
+
+    // Particle generation
+    const particleContainer = document.querySelector('.particles');
+    const particleCount = 40;
+
+    function randomRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    for(let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = randomRange(3, 8);
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left = randomRange(0, 100) + 'vw';
+      p.style.top = randomRange(90, 110) + 'vh';
+      p.style.animationDuration = randomRange(10, 20) + 's';
+      p.style.animationDelay = (i * 0.5) + 's';
+      particleContainer.appendChild(p);
+    }
+  </script>
+</body>
+</html>
